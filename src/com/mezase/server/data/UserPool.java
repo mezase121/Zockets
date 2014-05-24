@@ -14,6 +14,8 @@ public class UserPool {
 	private Lock lock = new ReentrantLock();
 	private ArrayList<User> users = new ArrayList<User>();
 	private int size;
+	private long freeID;
+	private boolean removedID = false;
 
 	public UserPool() {
 
@@ -23,17 +25,19 @@ public class UserPool {
 		lock.lock();
 		users.add(user);
 		size++;
-		System.out.println("New user: " + user.getConnection().getIpAddress() + ":" + user.getConnection().getPort() + " (" + size + ")");
+		System.out.println("New user: " + user.getInfo());
 		lock.unlock();
 		MessageListener ml = new MessageListener(user);
 		Thread mlt = new Thread(ml);
 		mlt.start();
 	}
 
-	public void removeUser(Connection connection) {
+	public void removeUser(User user) {
 		lock.lock();
 		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getConnection().equals(connection)) {
+			if (users.get(i).equals(user)) {
+				removedID = true;
+				freeID = users.get(i).getId();
 				users.remove(i);
 				size--;
 				break;
@@ -107,4 +111,11 @@ public class UserPool {
 		this.users = users;
 	}
 
+	public long getFreeID() {
+		if (!removedID) {
+			return size;
+		}
+		removedID = false;
+		return freeID;
+	}
 }

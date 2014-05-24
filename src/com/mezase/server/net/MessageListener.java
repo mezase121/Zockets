@@ -9,7 +9,7 @@ import com.mezase.server.models.Message;
 import com.mezase.server.models.User;
 
 public class MessageListener implements Runnable {
-	
+
 	private User user;
 	private BufferedReader br;
 	private String message;
@@ -52,13 +52,7 @@ public class MessageListener implements Runnable {
 					}
 				}
 				code = br.readLine(); // What to do with the message
-				if (code == null) {
-					System.out.println("User " + user.getConnection().getIpAddress() + " has disconnected.");
-					user.getConnection().getSocket().close();
-					br.close();
-					running = false;
-				}
-				else {
+				if (code != null) {
 					if (code.equals("001")) {
 					}
 					else {
@@ -70,7 +64,8 @@ public class MessageListener implements Runnable {
 					user.getConnection().getSocket().close();
 					br.close();
 					running = false;
-					e.printStackTrace();
+					//e.printStackTrace();
+					System.out.println("User " + user.getInfo() + " has disconnected.");
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

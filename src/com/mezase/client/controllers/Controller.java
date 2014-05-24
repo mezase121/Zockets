@@ -1,5 +1,6 @@
 package com.mezase.client.controllers;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -26,6 +27,15 @@ public class Controller {
 		mws.construct(message, data);
 		out.print(message.getMessage().getText());
 		out.flush();
+	}
+
+	public void disconnect() {
+		out.close();
+		try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

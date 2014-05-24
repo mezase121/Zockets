@@ -16,14 +16,14 @@ public class Controller {
 	}
 
 	public void addUser(Connection connection) {
-		User user = new User(usersPool.getSize(), connection);
+		User user = new User(usersPool.getFreeID(), connection);
 		usersPool.addUser(user);
-		MessageWorker mw = new MessageWorker(user, user.getQueue(), md);
+		MessageWorker mw = new MessageWorker(user, user.getQueue(), md, usersPool);
 		Thread mwt = new Thread(mw);
 		mwt.start();
 	}
 
-	public void removeUser(Connection connection) {
-		usersPool.removeUser(connection);
+	public void removeUser(User user) {
+		usersPool.removeUser(user);
 	}
 }

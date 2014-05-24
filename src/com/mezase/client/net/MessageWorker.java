@@ -1,22 +1,27 @@
 package com.mezase.client.net;
 
+import java.net.Socket;
+
 import com.mezase.client.data.MessageQueue;
 import com.mezase.client.view.ClientGUI;
 
 public class MessageWorker implements Runnable {
 
+	private Socket socket;
 	private MessageQueue queue;
 	private ClientGUI gui;
 	private int timer;
+	private boolean running = true;
 
-	public MessageWorker(MessageQueue queue, ClientGUI gui) {
+	public MessageWorker(Socket socket, MessageQueue queue, ClientGUI gui) {
+		this.socket = socket;
 		this.queue = queue;
 		this.gui = gui;
 	}
 
 	@Override
 	public void run() {
-		while (true) {
+		while (running) {
 			if (queue.getMessages().size() > 0) {
 				String message = queue.readMessage().getText();
 				gui.updateOutput(message);
@@ -24,12 +29,15 @@ public class MessageWorker implements Runnable {
 			}
 			else {
 				timer++;
-				if (timer > 900000) {
-					timer = 4000;
+				if (timer > 9000000) {
+					timer = 10000;
 				}
 			}
-			if (timer >= 4000) {
-				sleep(2);
+			if (timer >= 10000) {
+				sleep(10);
+			}
+			if (socket.isClosed()) {
+				running = false;
 			}
 		}
 	}

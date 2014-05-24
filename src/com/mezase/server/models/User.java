@@ -10,10 +10,10 @@ public class User {
 	private String username;
 	private long id;
 	private Connection connection;
-	private MessageQueue queue =  new MessageQueue();
+	private MessageQueue queue = new MessageQueue();
 	private PrintWriter out;
 
-	public User(int id, Connection connection) {
+	public User(long id, Connection connection) {
 		this.id = id;
 		this.connection = connection;
 		try {
@@ -22,8 +22,8 @@ public class User {
 			e.printStackTrace();
 		}
 	}
-	
-	public void write(String message){
+
+	public void write(String message) {
 		out.println(message);
 	}
 
@@ -57,6 +57,11 @@ public class User {
 
 	public MessageQueue getQueue() {
 		return queue;
+	}
+
+	public String getInfo() {
+		Connection c = connection;
+		return c.getIpAddress() + ":" + c.getPort() + "(" + id + ")";
 	}
 
 	@Override

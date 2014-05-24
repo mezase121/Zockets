@@ -34,7 +34,7 @@ public class MessageListener implements Runnable {
 				try { //Server connection lost...
 					br.close();
 					running = false;
-					e.printStackTrace();
+					//e.printStackTrace(); //Client disconnected
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

@@ -26,12 +26,17 @@ public class Application {
 		Thread t2 = new Thread(new MessagesBufferTest(cp, "remove"));
 		t1.start();
 		t2.start();*/
-		/*Server server = new Server();
-		server.start();*/
-		for (int i = 0; i < 1; i++) {
-			Client client = new Client();
-			client.start();
-			Thread.sleep(10);
+		int opt = 3;
+		if (opt == 1 || opt == 3) {
+			Server server = new Server();
+			server.start();
+		}
+		if (opt == 2 || opt == 3) {
+			for (int i = 0; i < 10; i++) {
+				Client client = new Client();
+				client.start();
+				Thread.sleep(25);
+			}
 		}
 	}
 

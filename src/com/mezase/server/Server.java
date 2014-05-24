@@ -8,7 +8,7 @@ import com.mezase.server.controllers.MessageDistributor;
 import com.mezase.server.data.MessageQueue;
 import com.mezase.server.net.ConnectionListener;
 
-public class Server {
+public class Server extends Thread {
 
 	private int PORT = 10511;
 	private int MAX_CONNECTIONS = 1000;

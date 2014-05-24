@@ -29,4 +29,8 @@ public class Connection {
 		return ipAddress;
 	}
 
+	public String getInfo() {
+		return ipAddress + ":" + port;
+	}
+
 }

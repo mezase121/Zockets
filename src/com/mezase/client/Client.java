@@ -31,7 +31,7 @@ public class Client extends Thread {
 			controller = new Controller(socket, queue, out);
 			gui = new ClientGUI(controller);
 			MessageListener ml = new MessageListener(socket, queue);
-			MessageWorker mw = new MessageWorker(queue, gui);
+			MessageWorker mw = new MessageWorker(socket, queue, gui);
 			Thread mlt = new Thread(ml);
 			Thread mwt = new Thread(mw);
 			mlt.start();
