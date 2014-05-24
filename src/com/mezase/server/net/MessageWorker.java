@@ -1,26 +1,32 @@
 package com.mezase.server.net;
 
+import com.mezase.server.controllers.MessageDistributor;
 import com.mezase.server.data.MessageQueue;
+import com.mezase.server.models.Message;
 import com.mezase.server.models.User;
 
-public class UserMessageWorker implements Runnable {
+public class MessageWorker implements Runnable {
+
+	private MessageDistributor md;
 
 	private User user;
 	private MessageQueue queue;
 	private int timer;
 
-	public UserMessageWorker(User user, MessageQueue queue) {
+	public MessageWorker(User user, MessageQueue queue, MessageDistributor md) {
 		this.user = user;
 		this.queue = queue;
+		this.md = md;
 	}
 
 	@Override
 	public void run() {
 		while (true) {
 			if (queue.getMessages().size() > 0) {
-				String message = queue.readMessage().getText();
+				Message message = queue.readMessage();
 				System.out.println("Server received: " + message);
-				//user.write(message);
+				
+				md.distribute(message);
 				timer = 0;
 			}
 			else {

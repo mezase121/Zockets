@@ -1,15 +1,15 @@
 package com.mezase.server.test;
 
-import com.mezase.server.data.UsersPool;
+import com.mezase.server.data.UserPool;
 import com.mezase.server.models.Connection;
 import com.mezase.server.models.User;
 
 public class UsersPoolTest implements Runnable {
 
-	private UsersPool pool;
+	private UserPool pool;
 	private String testerType;
 
-	public UsersPoolTest(UsersPool pool, String testerType) {
+	public UsersPoolTest(UserPool pool, String testerType) {
 		this.pool = pool;
 		this.testerType = testerType;
 	}

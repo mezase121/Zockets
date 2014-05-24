@@ -57,7 +57,7 @@ public class ClientGUI implements ActionListener {
 		contentPane.setLayout(null);
 
 		jframe = new JFrame();
-		jframe.setTitle("Exportador McDoc");
+		jframe.setTitle("Kotoba");
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setBounds(0, 0, 500, 320);
 		jframe.setContentPane(contentPane);

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 import com.mezase.server.controllers.Controller;
+import com.mezase.server.controllers.MessageDistributor;
 import com.mezase.server.data.MessageQueue;
 import com.mezase.server.net.ConnectionListener;
 
@@ -13,7 +14,6 @@ public class Server {
 	private int MAX_CONNECTIONS = 1000;
 	private ServerSocket ssocket;
 	private Controller controller = new Controller();
-	private MessageQueue globalQueue = new MessageQueue();
 
 	public Server() {
 

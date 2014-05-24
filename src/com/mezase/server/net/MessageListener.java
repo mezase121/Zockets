@@ -4,11 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.mezase.server.controllers.MessageDistributor;
 import com.mezase.server.models.Message;
 import com.mezase.server.models.User;
 
 public class MessageListener implements Runnable {
-
+	
 	private User user;
 	private BufferedReader br;
 	private String message;
@@ -30,12 +31,12 @@ public class MessageListener implements Runnable {
 		while (running) {
 			try {
 				message = "";
-				String header = ""; //Accept Header !0_Hd#
-				String data = ""; //Message data
-				String code = ""; //What to do with the message
+				String header = ""; // Accept Header !0_Hd#
+				String data = ""; // Message data
+				String code = ""; // What to do with the message
 				header = br.readLine();
 				if (header.equals("!0_Hd#")) {
-					while (!data.equals("!0_end#")) { //End of data = !0_end#
+					while (!data.equals("!0_end#")) { // End of data = !0_end#
 						data = br.readLine();
 						if (!data.equals("!0_end#")) {
 							if (message.length() == 0) {
@@ -50,7 +51,7 @@ public class MessageListener implements Runnable {
 						}
 					}
 				}
-				code = br.readLine(); //What to do with the message
+				code = br.readLine(); // What to do with the message
 				if (code == null) {
 					System.out.println("User " + user.getConnection().getIpAddress() + " has disconnected.");
 					user.getConnection().getSocket().close();
@@ -58,15 +59,21 @@ public class MessageListener implements Runnable {
 					running = false;
 				}
 				else {
-					if(code.equals("001")){
-						
+					if (code.equals("001")) {
 					}
 					else {
 						user.addMessage(new Message(message, user, code));
-					}					
+					}
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				try {
+					user.getConnection().getSocket().close();
+					br.close();
+					running = false;
+					e.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 	}

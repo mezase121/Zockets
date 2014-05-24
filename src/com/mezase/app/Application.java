@@ -4,7 +4,7 @@ import com.mezase.client.Client;
 import com.mezase.logging.Logger;
 import com.mezase.server.Server;
 import com.mezase.server.data.MessageQueue;
-import com.mezase.server.data.UsersPool;
+import com.mezase.server.data.UserPool;
 import com.mezase.server.test.UsersPoolTest;
 import com.mezase.server.test.MessageQueueTest;
 import com.mezase.client.view.ClientGUI;
@@ -26,12 +26,12 @@ public class Application {
 		Thread t2 = new Thread(new MessagesBufferTest(cp, "remove"));
 		t1.start();
 		t2.start();*/
-		Server server = new Server();
-		server.start();
+		/*Server server = new Server();
+		server.start();*/
 		for (int i = 0; i < 1; i++) {
 			Client client = new Client();
 			client.start();
-			Thread.sleep(50);
+			Thread.sleep(10);
 		}
 	}
 

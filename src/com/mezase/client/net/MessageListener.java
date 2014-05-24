@@ -13,6 +13,7 @@ public class MessageListener implements Runnable {
 	private BufferedReader br;
 	private String message;
 	private MessageQueue queue;
+	private boolean running = true;
 
 	public MessageListener(Socket socket, MessageQueue queue) {
 		try {
@@ -25,12 +26,19 @@ public class MessageListener implements Runnable {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (running) {
 			try {
 				message = br.readLine();
 				queue.addMessage(new Message(message));
 			} catch (IOException e) {
-				e.printStackTrace();
+				try { //Server connection lost...
+					br.close();
+					running = false;
+					e.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
 			}
 		}
 	}
