@@ -78,7 +78,7 @@ public class ClientGUI implements ActionListener {
 		btnSend.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnSend.setBounds(443, 218, 49, 72);
 		btnSend.addActionListener(this);
-		btnSend.setEnabled(false);
+		btnSend.setEnabled(true);
 		contentPane.add(btnSend);
 
 		txtMessageOutput = new JTextArea("");
@@ -128,10 +128,7 @@ public class ClientGUI implements ActionListener {
 		actions.put(TEXT_SUBMIT, new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				txtMessageInput.setText(txtMessageInput.getText().trim());
-				if (txtMessageInput.getText().length() > 0) {
-					sendMessage();
-				}
+				sendMessage();
 			}
 		});
 		kl = new KeyListener() {
@@ -159,6 +156,7 @@ public class ClientGUI implements ActionListener {
 	}
 
 	public void sendMessage() {
+		txtMessageInput.setText(txtMessageInput.getText().trim());
 		if (txtMessageInput.getText().length() > 0) {
 			String message = txtMessageInput.getText();
 			controller.writeBroadcastMessage(message);

@@ -1,37 +1,37 @@
 package com.mezase.client.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import com.mezase.client.data.MessageQueue;
-import com.mezase.client.data.MessageWorkshop;
-import com.mezase.client.models.*;
+import com.mezase.common.models.Message;
 
 public class Controller {
 
 	private Socket socket;
 	private MessageQueue queue;
-	private PrintWriter out;
-	private MessageWorkshop mws = new MessageWorkshop();
+	private ObjectOutputStream oos;
 
-	public Controller(Socket socket, MessageQueue queue, PrintWriter out) {
+	public Controller(Socket socket, MessageQueue queue, ObjectOutputStream oos) {
 		this.socket = socket;
 		this.queue = queue;
-		this.out = out;
+		this.oos = oos;
 
 	}
 
 	public void writeBroadcastMessage(String data) {
-		BroadcastMessage message = new BroadcastMessage();
-		mws.construct(message, data);
-		out.print(message.getMessage().getText());
-		out.flush();
+		Message message = new Message(data, 0);
+		try {
+			oos.writeObject(message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void disconnect() {
-		out.close();
 		try {
+			oos.close();
 			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();

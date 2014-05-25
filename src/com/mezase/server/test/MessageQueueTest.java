@@ -1,7 +1,7 @@
 package com.mezase.server.test;
 
+import com.mezase.common.models.Message;
 import com.mezase.server.data.MessageQueue;
-import com.mezase.server.models.Message;
 
 public class MessageQueueTest implements Runnable {
 
@@ -17,8 +17,8 @@ public class MessageQueueTest implements Runnable {
 	public void run() {
 		if (testerType.equals("add")) {
 			while (true) {
-				buffer.addMessage(new Message("Hi!"));
-				System.out.println("Added: Hi!"+ " | Size:" + buffer.getMessages().size());
+				buffer.addMessage(new Message("Hi!", 0));
+				System.out.println("Added: Hi!" + " | Size:" + buffer.getMessages().size());
 				sleep(1);
 			}
 		}

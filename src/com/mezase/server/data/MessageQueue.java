@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.mezase.server.models.Message;
+import com.mezase.common.models.Message;
 
 public class MessageQueue {
 
@@ -22,7 +22,7 @@ public class MessageQueue {
 	}
 
 	public Message readMessage() {
-		Message message = new Message("");
+		Message message = null;
 		lock.lock();
 		if (messages.size() > 0) {
 			message = messages.pollFirst();
@@ -43,7 +43,7 @@ public class MessageQueue {
 		}
 
 		public Message readMessage() {
-			Message message = new Message("");
+			Message message = null;
 			lock.lock();
 			if (messages.size() > 0) {
 				message = messages.pollFirst();

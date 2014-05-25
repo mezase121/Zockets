@@ -8,7 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Logger {
+public class ZLogger {
 
 	private static PrintWriter cwriter;
 	private static PrintWriter swriter;

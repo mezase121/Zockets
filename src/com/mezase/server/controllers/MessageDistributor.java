@@ -1,7 +1,7 @@
 package com.mezase.server.controllers;
 
+import com.mezase.common.models.Message;
 import com.mezase.server.data.UserPool;
-import com.mezase.server.models.Message;
 import com.mezase.server.models.User;
 
 public class MessageDistributor {
@@ -13,19 +13,14 @@ public class MessageDistributor {
 	}
 
 	public void distribute(Message message) {
-		String code = message.getCode();
-		String text = message.getText();
-
-		if (code.equals("01")) {
+		int code = message.getCode();
+		switch (code) {
+		case 0:
 			for (int i = 0; i < userPool.getSize(); i++) {
 				User u = userPool.getUser(i);
-				u.write(text);
+				u.write(message);
 			}
+			break;
 		}
-		else if (code.equals("00")) {
-			//echo
-		}
-
 	}
-
 }

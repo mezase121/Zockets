@@ -10,13 +10,14 @@ import com.mezase.server.net.ConnectionListener;
 
 public class Server extends Thread {
 
-	private int PORT = 10511;
-	private int MAX_CONNECTIONS = 1000;
+	private int PORT;
+	private int MAX_CONNECTIONS;
 	private ServerSocket ssocket;
 	private Controller controller = new Controller();
 
-	public Server() {
-
+	public Server(int PORT, int MAX_CONNECTIONS) {
+		this.PORT = PORT;
+		this.MAX_CONNECTIONS = MAX_CONNECTIONS;
 	}
 
 	public void start() {

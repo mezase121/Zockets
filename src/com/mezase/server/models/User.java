@@ -1,8 +1,9 @@
 package com.mezase.server.models;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 
+import com.mezase.common.models.Message;
 import com.mezase.server.data.MessageQueue;
 
 public class User {
@@ -11,20 +12,24 @@ public class User {
 	private long id;
 	private Connection connection;
 	private MessageQueue queue = new MessageQueue();
-	private PrintWriter out;
+	private ObjectOutputStream oos;
 
 	public User(long id, Connection connection) {
 		this.id = id;
 		this.connection = connection;
 		try {
-			out = new PrintWriter(connection.getSocket().getOutputStream(), true);
+			oos = new ObjectOutputStream(connection.getSocket().getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void write(String message) {
-		out.println(message);
+	public void write(Message message) {
+		try {
+			oos.writeObject(message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setUsername(String username) {
