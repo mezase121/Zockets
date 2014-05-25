@@ -6,6 +6,7 @@ import java.net.Socket;
 
 import com.mezase.client.data.MessageQueue;
 import com.mezase.common.models.Message;
+import com.mezase.common.models.interfaces.IMessage;
 
 public class Controller {
 
@@ -21,7 +22,7 @@ public class Controller {
 	}
 
 	public void writeBroadcastMessage(String data) {
-		Message message = new Message(data, 0);
+		IMessage message = new Message(data, 0);
 		try {
 			oos.writeObject(message);
 		} catch (IOException e) {

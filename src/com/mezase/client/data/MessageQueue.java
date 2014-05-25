@@ -5,6 +5,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.mezase.common.models.Message;
+import com.mezase.common.models.interfaces.IMessage;
 
 public class MessageQueue {
 
@@ -21,8 +22,8 @@ public class MessageQueue {
 		lock.unlock();
 	}
 
-	public Message readMessage() {
-		Message message = null;
+	public IMessage readMessage() {
+		IMessage message = null;
 		lock.lock();
 		if (messages.size() > 0) {
 			message = messages.pollFirst();
@@ -42,8 +43,8 @@ public class MessageQueue {
 			lock.unlock();
 		}
 
-		public Message readMessage() {
-			Message message = null;
+		public IMessage readMessage() {
+			IMessage message = null;
 			lock.lock();
 			if (messages.size() > 0) {
 				message = messages.pollFirst();

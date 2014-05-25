@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 import com.mezase.common.models.Message;
+import com.mezase.common.models.interfaces.IMessage;
 import com.mezase.server.data.MessageQueue;
 
 public class User {
@@ -24,7 +25,7 @@ public class User {
 		}
 	}
 
-	public void write(Message message) {
+	public void write(IMessage message) {
 		try {
 			oos.writeObject(message);
 		} catch (IOException e) {
@@ -40,7 +41,7 @@ public class User {
 		queue.addMessage(message);
 	}
 
-	public Message readMessage() {
+	public IMessage readMessage() {
 		return queue.readMessage();
 	}
 

@@ -1,6 +1,6 @@
 package com.mezase.server.net;
 
-import com.mezase.common.models.Message;
+import com.mezase.common.models.interfaces.IMessage;
 import com.mezase.server.controllers.MessageDistributor;
 import com.mezase.server.data.MessageQueue;
 import com.mezase.server.data.UserPool;
@@ -27,7 +27,7 @@ public class MessageWorker implements Runnable {
 	public void run() {
 		while (running) {
 			if (queue.getMessages().size() > 0) {
-				Message message = queue.readMessage();
+				IMessage message = queue.readMessage();
 				System.out.println("Server received: " + message.getText());
 				md.distribute(message);
 				timer = 0;

@@ -1,6 +1,6 @@
 package com.mezase.server.controllers;
 
-import com.mezase.common.models.Message;
+import com.mezase.common.models.interfaces.IMessage;
 import com.mezase.server.data.UserPool;
 import com.mezase.server.models.User;
 
@@ -12,7 +12,7 @@ public class MessageDistributor {
 		this.userPool = userPool;
 	}
 
-	public void distribute(Message message) {
+	public void distribute(IMessage message) {
 		int code = message.getCode();
 		switch (code) {
 		case 0:
