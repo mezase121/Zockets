@@ -13,13 +13,13 @@ public class Application {
 	public static void main(String[] args) throws InterruptedException {		
 		ZLogger.init("Zockets");
 
-		int opt = 1;
+		int opt = 3;
 		if (opt == 1 || opt == 3) {
 			Server server = new Server(PORT, MAX_CONNECTIONS);
 			server.start();
 		}
 		if (opt == 2 || opt == 3) {
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 300; i++) {
 				Client client = new Client(HOST, PORT);
 				client.start();
 				Thread.sleep(25);

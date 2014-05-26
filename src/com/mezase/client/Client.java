@@ -36,6 +36,8 @@ public class Client extends Thread {
 			Thread mwt = new Thread(mw);
 			mlt.start();
 			mwt.start();
+			mlt.join();
+			mwt.join();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

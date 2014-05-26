@@ -34,7 +34,7 @@ public class MessageWorker implements Runnable {
 			}
 			else {
 				timer++;
-				if (timer > 9000000) {
+				if (timer >= Integer.MAX_VALUE) {
 					timer = 10000;
 				}
 			}

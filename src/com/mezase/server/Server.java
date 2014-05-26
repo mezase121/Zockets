@@ -27,7 +27,7 @@ public class Server extends Thread {
 			Thread clt = new Thread(cl);
 			clt.start();
 			System.out.println(":::Server online:::");
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
