@@ -18,17 +18,23 @@ public class MessageQueue {
 
 	public void addMessage(Message message) {
 		lock.lock();
-		messages.add(message);
-		lock.unlock();
+		try {
+			messages.add(message);
+		} finally {
+			lock.unlock();
+		}
 	}
 
 	public IMessage readMessage() {
 		IMessage message = null;
 		lock.lock();
-		if (messages.size() > 0) {
-			message = messages.pollFirst();
+		try {
+			if (messages.size() > 0) {
+				message = messages.pollFirst();
+			}
+		} finally {
+			lock.unlock();
 		}
-		lock.unlock();
 		return message;
 	}
 
@@ -39,17 +45,23 @@ public class MessageQueue {
 	public class Test {
 		public void addMessage(Message message) {
 			lock.lock();
-			messages.add(message);
-			lock.unlock();
+			try {
+				messages.add(message);
+			} finally {
+				lock.unlock();
+			}
 		}
 
 		public IMessage readMessage() {
 			IMessage message = null;
 			lock.lock();
-			if (messages.size() > 0) {
-				message = messages.pollFirst();
+			try {
+				if (messages.size() > 0) {
+					message = messages.pollFirst();
+				}
+			} finally {
+				lock.unlock();
 			}
-			lock.unlock();
 			return message;
 		}
 	}

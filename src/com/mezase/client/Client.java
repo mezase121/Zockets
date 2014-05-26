@@ -2,7 +2,6 @@ package com.mezase.client;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 import com.mezase.client.controllers.Controller;
@@ -18,7 +17,6 @@ public class Client extends Thread {
 	private Socket socket;
 	private Controller controller;
 	private MessageQueue queue = new MessageQueue();
-	private String msg;
 	private ClientGUI gui;
 
 	public Client(String HOST, int PORT) {
