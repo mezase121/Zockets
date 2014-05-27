@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import com.mezase.common.models.User;
 import com.mezase.server.controllers.MessageDistributor;
 import com.mezase.server.models.Connection;
-import com.mezase.server.models.User;
 import com.mezase.server.net.MessageListener;
 
 public class UserPool {

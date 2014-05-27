@@ -1,8 +1,8 @@
 package com.mezase.server.controllers;
 
+import com.mezase.common.models.User;
 import com.mezase.server.data.UserPool;
 import com.mezase.server.models.Connection;
-import com.mezase.server.models.User;
 import com.mezase.server.net.MessageWorker;
 
 public class Controller {

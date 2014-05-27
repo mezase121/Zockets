@@ -1,8 +1,8 @@
 package com.mezase.server.test;
 
+import com.mezase.common.models.User;
 import com.mezase.server.data.UserPool;
 import com.mezase.server.models.Connection;
-import com.mezase.server.models.User;
 
 public class UsersPoolTest implements Runnable {
 

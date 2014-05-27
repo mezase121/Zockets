@@ -1,13 +1,16 @@
-package com.mezase.server.models;
+package com.mezase.common.models;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-import com.mezase.common.models.Message;
 import com.mezase.common.models.interfaces.IMessage;
 import com.mezase.server.data.MessageQueue;
+import com.mezase.server.models.Connection;
 
-public class User {
+public class User implements Serializable {
+
+	private static final long serialVersionUID = -3104695998243120654L;
 
 	private String username;
 	private long id;
@@ -37,7 +40,7 @@ public class User {
 		this.username = username;
 	}
 
-	public void addMessage(Message message) {
+	public void addMessage(IMessage message) {
 		queue.addMessage(message);
 	}
 

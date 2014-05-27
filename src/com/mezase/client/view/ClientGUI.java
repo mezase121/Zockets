@@ -84,9 +84,11 @@ public class ClientGUI implements ActionListener {
 		txtMessageOutput = new JTextArea("");
 		txtMessageOutput.setFont(new Font("Arial", Font.PLAIN, 13));
 		txtMessageOutput.setEditable(false);
+		txtMessageOutput.setLineWrap(true);
 		txtMessageOutput.setBounds(0, 0, 493, 215);
 
 		txtMessageInput = new JTextArea("");
+		txtMessageInput.setLineWrap(true);
 		txtMessageInput.setFont(new Font("Arial", Font.PLAIN, 13));
 
 		messageOutputScroll = new JScrollPane();

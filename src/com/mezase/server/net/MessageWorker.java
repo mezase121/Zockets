@@ -1,10 +1,10 @@
 package com.mezase.server.net;
 
+import com.mezase.common.models.User;
 import com.mezase.common.models.interfaces.IMessage;
 import com.mezase.server.controllers.MessageDistributor;
 import com.mezase.server.data.MessageQueue;
 import com.mezase.server.data.UserPool;
-import com.mezase.server.models.User;
 
 public class MessageWorker implements Runnable {
 

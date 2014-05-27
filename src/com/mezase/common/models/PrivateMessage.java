@@ -1,18 +1,28 @@
 package com.mezase.common.models;
 
-import java.io.Serializable;
-
 public class PrivateMessage extends Message {
-	
-	private static final long serialVersionUID = -1789697848316350457L;
 
-	public PrivateMessage(String text, int code) {
+	private static final long serialVersionUID = 78521253392697161L;
+	
+	private int id;
+	private String username;
+
+	public PrivateMessage(String text, int code, int id) {
 		super(text, code);
+		this.id = id;
 	}
 
-	
+	public PrivateMessage(String text, int code, String username) {
+		super(text, code);
+		this.username = username;
+	}
 
-	
-	
+	public int getId() {
+		return id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
 
 }

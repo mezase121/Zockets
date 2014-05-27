@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import com.mezase.common.models.Message;
-import com.mezase.server.models.User;
+import com.mezase.common.models.User;
 
 public class MessageListener implements Runnable {
 

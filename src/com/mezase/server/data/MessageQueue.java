@@ -10,13 +10,13 @@ import com.mezase.common.models.interfaces.IMessage;
 public class MessageQueue {
 
 	private Lock lock = new ReentrantLock();
-	private LinkedList<Message> messages = new LinkedList<Message>();
+	private LinkedList<IMessage> messages = new LinkedList<IMessage>();
 
 	public MessageQueue() {
 
 	}
 
-	public void addMessage(Message message) {
+	public void addMessage(IMessage message) {
 		lock.lock();
 		messages.add(message);
 		lock.unlock();
@@ -32,7 +32,7 @@ public class MessageQueue {
 		return message;
 	}
 
-	public LinkedList<Message> getMessages() {
+	public LinkedList<IMessage> getMessages() {
 		return messages;
 	}
 
