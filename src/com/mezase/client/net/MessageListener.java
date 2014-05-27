@@ -9,34 +9,25 @@ import com.mezase.common.models.Message;
 
 public class MessageListener implements Runnable {
 
-	private ObjectInputStream ois;
+	private Connection connection;
 	private String message;
 	private MessageQueue queue;
 	private boolean running = true;
 
-	public MessageListener(Socket socket, MessageQueue queue) {
-		try {
-			this.queue = queue;
-			ois = new ObjectInputStream(socket.getInputStream());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public MessageListener(Connection connection, MessageQueue queue) {
+		this.queue = queue;
+		this.connection = connection;
 	}
 
 	@Override
 	public void run() {
-		while (running) {
+		while (running && !connection.isInactive()) {
 			try {
-				Message message = (Message) ois.readObject();
+				Message message = (Message) connection.getOis().readObject();
 				queue.addMessage(message);
 			} catch (Exception e) {
-				try {
-					ois.close();
-					running = false;
-					//e.printStackTrace(); //Client disconnected
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				running = false;
+				//e.printStackTrace(); //Client disconnected
 			}
 		}
 	}

@@ -107,8 +107,10 @@ public class ClientGUI implements ActionListener {
 
 		jframe.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				controller.disconnect();
-				System.exit(0);
+				if (controller.isConnected()) {
+					controller.disconnect();
+				}
+				jframe.dispose();
 			}
 		});
 	}

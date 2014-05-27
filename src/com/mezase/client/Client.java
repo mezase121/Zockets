@@ -1,11 +1,8 @@
 package com.mezase.client;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-
 import com.mezase.client.controllers.Controller;
 import com.mezase.client.data.MessageQueue;
+import com.mezase.client.net.Connection;
 import com.mezase.client.net.MessageListener;
 import com.mezase.client.net.MessageWorker;
 import com.mezase.client.view.ClientGUI;
@@ -14,7 +11,7 @@ public class Client extends Thread {
 
 	private String HOST;
 	private int PORT;
-	private Socket socket;
+	private Connection connection;
 	private Controller controller;
 	private MessageQueue queue = new MessageQueue();
 	private ClientGUI gui;
@@ -26,27 +23,23 @@ public class Client extends Thread {
 
 	public void run() {
 		try {
-			socket = new Socket(HOST, PORT);
-			ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-			controller = new Controller(socket, queue, oos);
+			connection = new Connection(HOST, PORT);
+			controller = new Controller(connection, queue);
 			gui = new ClientGUI(controller);
-			MessageListener ml = new MessageListener(socket, queue);
-			MessageWorker mw = new MessageWorker(socket, queue, gui);
-			Thread mlt = new Thread(ml);
-			Thread mwt = new Thread(mw);
-			mlt.start();
-			mwt.start();
-			mlt.join();
-			mwt.join();
+			if (connection.isConnected()) {
+				MessageListener ml = new MessageListener(connection, queue);
+				MessageWorker mw = new MessageWorker(connection, queue, gui);
+				Thread mlt = new Thread(ml);
+				Thread mwt = new Thread(mw);
+				mlt.setDaemon(true);
+				mwt.setDaemon(true);
+				mlt.start();
+				mwt.start();
+				mlt.join();
+				mwt.join();
+				connection.close();
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void close() {
-		try {
-			socket.close();
-		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
