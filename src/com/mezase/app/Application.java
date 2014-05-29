@@ -9,14 +9,14 @@ public class Application {
 	/**
 	 * TODO: -implement observer pattern to update login/logout and notify other users (observers). p.85
 	 */
-	private static String HOST = "localhost";
+	private static String HOST = "172.16.16.198";
 	private static int PORT = 10511;
 	private static int MAX_CONNECTIONS = 1000;
 
 	public static void main(String[] args) throws InterruptedException {
 		ZLogger.init("Zockets");
 
-		int opt = 2;
+		int opt = 3;
 		if (opt == 1 || opt == 3) {
 			Server server = new Server(PORT, MAX_CONNECTIONS);
 			server.start();

@@ -6,7 +6,7 @@ import com.mezase.common.models.interfaces.IMessage;
 
 public class Message implements Serializable, IMessage {
 
-	private static final long serialVersionUID = 3127925688153804302L;
+	private static final long serialVersionUID = -6500130205281164170L;
 	private String text = "";
 	private int code;
 

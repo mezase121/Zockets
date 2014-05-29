@@ -12,15 +12,13 @@ public class MessageWorker implements Runnable {
 
 	private User user;
 	private MessageQueue queue;
-	private UserPool userPool;
 	private int timer;
 	private boolean running = true;
 
-	public MessageWorker(User user, MessageQueue queue, MessageDistributor md, UserPool userPool) {
+	public MessageWorker(User user, MessageDistributor md) {
 		this.user = user;
-		this.queue = queue;
+		this.queue = user.getQueue();
 		this.md = md;
-		this.userPool = userPool;
 	}
 
 	@Override
@@ -43,7 +41,6 @@ public class MessageWorker implements Runnable {
 			}
 			if (user.getConnection().getSocket().isClosed()) {
 				running = false;
-				userPool.removeUser(user);
 			}
 		}
 	}

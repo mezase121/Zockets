@@ -34,6 +34,7 @@ public class MessageListener implements Runnable {
 		while (running) {
 			try {
 				Object o = ois.readObject();
+				System.out.println("tel:"+o.getClass());
 				if (o.getClass().equals(Message.class)) {
 					user.addMessage((Message) o);
 				}

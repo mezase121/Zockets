@@ -18,7 +18,7 @@ public class Controller {
 	public void addUser(Connection connection) {
 		User user = new User(usersPool.getFreeID(), connection);
 		usersPool.addUser(user);
-		MessageWorker mw = new MessageWorker(user, user.getQueue(), md, usersPool);
+		MessageWorker mw = new MessageWorker(user, md);
 		Thread mwt = new Thread(mw);
 		mwt.start();
 	}
